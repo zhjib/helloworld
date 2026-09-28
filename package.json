@@ -1,0 +1,14 @@
+{
+  "name": "helloworld-site",
+  "version": "1.0.0",
+  "description": "我的第一个AI开发的Node.js网站：Hello World + 当前服务器时间",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "周锦博",
+  "license": "MIT"
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World - 周锦博</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 720px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .time-label {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+    .time-box {
+      font-size: 20px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+    .footer {
+      margin-top: 28px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hello World！我是周锦博，我的第一个AI开发的网站</h1>
+    <div class="time-label">当前服务器时间</div>
+    <div class="time-box" id="serverTime">加载中…</div>
+    <div class="footer">Node.js + 原生 HTTP 模块 · 无需安装任何第三方依赖</div>
+  </div>
+
+  <script>
+    // 每秒从服务器获取一次当前时间，保证页面上显示的是真实的服务器时间
+    async function updateServerTime() {
+      try {
+        const res = await fetch('/api/time');
+        const data = await res.json();
+        document.getElementById('serverTime').textContent =
+          data.full + '（星期' + data.weekday + '）';
+      } catch (err) {
+        document.getElementById('serverTime').textContent = '获取时间失败，请确认服务已启动';
+      }
+    }
+    updateServerTime();                 // 页面加载时立即获取一次
+    setInterval(updateServerTime, 1000); // 之后每秒自动刷新
+  </script>
+</body>
+</html>
